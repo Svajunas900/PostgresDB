@@ -27,7 +27,7 @@ connection = DbConnection()
 cursor = connection.cursor()
 
 
-def insert_to_balance(id, user_id, active_balance, last_operation_id):
+def insert_to_balance(id:int, user_id: int, active_balance: float, last_operation_id: int) -> None:
     cursor.execute(f"""
     INSERT INTO balance (id, user_id, active_balance, last_operation_id)
     VALUES ({id}, {user_id}, {active_balance}, {last_operation_id})
@@ -35,7 +35,7 @@ def insert_to_balance(id, user_id, active_balance, last_operation_id):
     connection.commit()
 
 
-def insert_to_history(id, user_id, url, date, time_spend):
+def insert_to_history(id: int, user_id: int, url: str, date: str, time_spend: str) -> None:
     cursor.execute(f"""
     INSERT INTO history (id, user_id, url, date, time_spend)
     VALUES ({id}, {user_id}, '{url}', '{date}', '{time_spend}')
@@ -43,7 +43,7 @@ def insert_to_history(id, user_id, url, date, time_spend):
     connection.commit()
 
 
-def insert_to_transactions(id, user_id, transaction_type):
+def insert_to_transactions(id: int, user_id: int, transaction_type: str) -> None:
     cursor.execute(f"""
     INSERT INTO transactions (id, user_id, transaction_type)
     VALUES ({id}, {user_id}, '{transaction_type}')
@@ -51,7 +51,7 @@ def insert_to_transactions(id, user_id, transaction_type):
     connection.commit()
 
 
-def insert_to_type_transactions(id, t_type):
+def insert_to_type_transactions(id: int, t_type: str) -> None:
     cursor.execute(f"""
     INSERT INTO type_transactions (id, t_type)
     VALUES ({id}, '{t_type}')
@@ -59,7 +59,7 @@ def insert_to_type_transactions(id, t_type):
     connection.commit()
 
 
-def insert_to_users(id, name, email):
+def insert_to_users(id: int, name: str, email: str) -> None:
     cursor.execute(f"""
     INSERT INTO users (id, name, email)
     VALUES ({id}, '{name}', '{email}')
