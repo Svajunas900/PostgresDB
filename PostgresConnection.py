@@ -1,4 +1,12 @@
 import psycopg2
+from dotenv import load_dotenv
+import os 
+
+
+load_dotenv()
+PG_USERNAME = os.getenv('PG_USERNAME')
+PG_PASSWORD = os.getenv('PG_PASSWORD')
+PG_DATABASE = os.getenv('PG_DATABASE')
 
 
 class DbConnection:
@@ -11,12 +19,13 @@ class DbConnection:
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super().__new__(cls, *args, **kwargs)
-            cls._instance = psycopg2.connect(database="postgres", user="postgres", password="Svajone267", host="localhost", port=5432)
+            cls._instance = psycopg2.connect(database=PG_DATABASE, user=PG_USERNAME, password=PG_PASSWORD, host="localhost", port=5432)
         return cls._instance
 
 
 connection = DbConnection()
 cursor = connection.cursor()
+
 
 def insert_to_balance(id, user_id, active_balance, last_operation_id):
     cursor.execute(f"""
